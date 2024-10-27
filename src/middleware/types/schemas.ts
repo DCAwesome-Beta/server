@@ -106,6 +106,15 @@ export const getWalletSchema = yup.object({
   })
 });
 
+export const createWalletSchema = yup.object({
+  body: yup
+    .object({
+      blockchain: yup.string().required()
+    })
+    .noUnknown(true)
+    .strict()
+});
+
 // Transactions
 export const listTransactionsSchema = yup.object({
   query: yup

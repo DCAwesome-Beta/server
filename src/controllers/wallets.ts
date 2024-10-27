@@ -67,3 +67,20 @@ export const getWallet = async (
     next(error);
   }
 };
+
+export const createWallet = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const response = await circleUserSdk.createWallet({
+      userToken: req.headers['token'] as string,
+      blockchains: [req.body.blockchain],
+      accountType: req.body.blockchain === "SOL-DEVNET" ? "EOA" : "SCA"
+    });
+    res.status(200).send(response.data);
+  } catch (error: unknown) {
+    next(error);
+  }
+}

@@ -16,12 +16,13 @@
 
 import express from 'express';
 import {
+  createWalletSchema,
   getWalletSchema,
   listWalletsSchema,
   validate,
   walletTokenBalanceSchema
 } from '../middleware';
-import { getWallet, getWalletTokenBalance, listWallets } from '../controllers';
+import { createWallet, getWallet, getWalletTokenBalance, listWallets } from '../controllers';
 
 const wallets = express.Router();
 
@@ -121,5 +122,7 @@ wallets.get(
  *
  */
 wallets.get('/:id', validate(getWalletSchema), getWallet);
+
+wallets.post('/', validate(createWalletSchema), createWallet);
 
 export { wallets };
